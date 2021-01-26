@@ -23,14 +23,20 @@ const theme = {
 };
 
 function App() {
-  const [setTheme] = useState("light");
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+  const [currTheme, setCurrTheme] = useState("light");
+  //const [currentTheme, setCurrentTheme]=useState("light");
+  const toggleTheme = () => {
+    if (currTheme === "dark") setCurrTheme("light");
+    else setCurrTheme("dark");
   };
+  //const toggleTheme =()=>{currentTheme === "dark"?setCurrentTheme("light"):setCurrentTheme("light")}
   return (
-    <ThemeProvider theme={theme === "light" ? theme.light : theme.dark}>
+    <ThemeProvider theme={theme[currTheme]}>
       <GlobalStyle />
-      <ThemeButton onClick={themeToggler}>Dark Theme</ThemeButton>
+      <ThemeButton onClick={toggleTheme}>
+        {currTheme.toUpperCase()} Theme
+      </ThemeButton>
+
       <Home />
       <CookieList />
     </ThemeProvider>
